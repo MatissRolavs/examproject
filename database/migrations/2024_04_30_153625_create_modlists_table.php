@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('modlists', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->integer("posts_amount");
-            $table->string("img_path");
+            $table->string("name");
+            $table->integer("user_id");
+            $table->integer("game_id");
             $table->timestamps();
         });
     }
@@ -25,11 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('modlists');
     }
 };
-// $table->id();
-// $table->string("name");
-// $table->integer("user_id");
-// $table->integer("game_id");
-// $table->timestamps();

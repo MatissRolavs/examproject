@@ -2,37 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGameRequest;
-use App\Http\Requests\UpdateGameRequest;
+use App\Http\Requests\StoreModlistRequest;
+use App\Http\Requests\UpdateModlistRequest;
 use Illuminate\Http\Request;
-use App\Models\Game;
+use App\Models\Modlist;
 
-class GameController extends Controller
+class ModlistController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(){
-        $games = Game::all();
-        return view("games.index",["games" => $games]);
+        $modlists = Modlist::all();
+        return view("lists.index",["lists" => $lists]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view("games.create");
+        return view("lists.create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request){
-        $game = New Game();
-        $game["title"] = $request["title"];
-        $game["posts_amount"] = 0;
-        $game["img_path"] = $request["img_path"];
-        $game->save();
+        $list = New Modlist();
+        $list["name"] = $request["name"];
+        $list["user_id"] = "j";
+        $list["game_id"] = "j";
+        $list->save();
         return redirect("/games");
     }
 
