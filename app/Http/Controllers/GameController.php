@@ -6,6 +6,9 @@ use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use Illuminate\Http\Request;
 use App\Models\Game;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -14,7 +17,10 @@ class GameController extends Controller
      */
     public function index(){
         $games = Game::all();
-        return view("games.index",["games" => $games]);
+        $userId = \Illuminate\Support\Facades\Auth::id();
+        $user = User::find($userId);
+        $userType = $user->type;
+        return view("games.index",["games" => $games,"userType"=>$userType]);
     }
 
     /**
@@ -41,7 +47,11 @@ class GameController extends Controller
      */
     public function show($id){
         $game = Game::find($id);
-        return view("games.show", ["game" => $game]);
+        $loggedId = \Illuminate\Support\Facades\Auth::id();
+        $users = User::all();
+        $lists = DB::table('modlists')->where('game_id', '=', $id)->get();
+        $loggedUser = Auth::user();
+        return view("games.show", ["game" => $game, "lists" => $lists, "users" => $users, "loggedId" => $loggedId,"loggedUser" => $loggedUser]);
     }
 
     /**
@@ -49,15 +59,16 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+        return view('games.edit', ['game' => $game]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGameRequest $request, Game $game)
-    {
-        //
+    public function update(Request $request,Game $game)
+    {   
+        $game->update($request->all());
+        return redirect()->route('games');
     }
 
     /**

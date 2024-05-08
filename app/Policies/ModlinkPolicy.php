@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Modlist;
+use App\Models\Modlink;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ModlistPolicy
+class ModlinkPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class ModlistPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Modlist $modlist): bool
+    public function view(User $user, Modlink $modlink): bool
     {
         //
     }
@@ -32,17 +32,18 @@ class ModlistPolicy
         //
     }
 
-     /* Determine whether the user can update the model.
+    /**
+     * Determine whether the user can update the model.
      */
-    public function update(User $user, Modlist $modlist): bool
+    public function update(User $user, Modlink $modlink): bool
     {
-        
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Modlist $modlist): bool
+    public function delete(User $user, Modlink $modlink): bool
     {
         //
     }
@@ -50,7 +51,7 @@ class ModlistPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Modlist $modlist): bool
+    public function restore(User $user, Modlink $modlink): bool
     {
         //
     }
@@ -58,7 +59,7 @@ class ModlistPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Modlist $modlist): bool
+    public function forceDelete(User $user, Modlink $modlink): bool
     {
         //
     }
