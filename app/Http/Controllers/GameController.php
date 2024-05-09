@@ -74,8 +74,14 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Game $game)
+    public function destroy($id)
     {
-        //
+        $game = DB::table('games')->where('id', '=', $id)->get();
+
+        $game = Game::find($id);
+
+        $game->delete();
+
+        return redirect("/games");
     }
 }

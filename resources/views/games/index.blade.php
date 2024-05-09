@@ -13,14 +13,21 @@
                     @foreach ($games as $game)
                     <div class="flex flex-col w-36 h-72 m-8 p-1">
                             <a href="/games-show/{{ $game['id'] }}" >
-                                <img src={{ $game["img_path"] }} alt="game image" class="w-auto">
+                                <img src={{ $game["img_path"] }} alt="game image" class="">
                             </a> 
                             <div style="width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                 <a href="/games-show/{{ $game['id'] }}" class="font-bold text-lg">{{ $game["title"] }}</a>
                                 <p class="text-sm">Posts: {{ $game["posts_amount"] }}</p>
                             </div>
                             @if ($userType == "admin")
-                                <a href="{{ route('games.edit', $game) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold rounded w-12 text-center">Edit</a>
+                            <div class="flex space-x-2">
+                                <form action="/games/{{ ($game->id) }} " method="post">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE" >
+                                    <input type="submit" value="Delete" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-400">
+                                </form>
+                                <a href="{{ route('games.edit', $game) }}" class="mt-2 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-400">Edit</a>
+                            </div>
                             @endif
                     </div>
                     @endforeach

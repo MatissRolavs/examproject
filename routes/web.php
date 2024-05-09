@@ -7,16 +7,16 @@ use App\Http\Controllers\ModlinkController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get("games-dash", function () {
+    return redirect(route("games"));
+})->middleware(["auth", "verified"])->name("games-dash");
 
 Route::middleware('auth')->group(function () {
 
     Route::get('/games', [GameController::class, "index"])->name('games');
     Route::get('/games-show/{id}', [GameController::class, "show"]);
     Route::get('/games-show/{game}', 'ModlistController@create');
+    
 
     Route::get('/lists', [ModlistController::class, "index"]);
     Route::get('/lists-create', [ModlistController::class, "create"])->name('lists-create');
@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth',"admin")->group(function () {
+    Route::delete('/games/{id}', [GameController::class, "destroy"])->name('games.destroy');
     Route::get('/games-create', [GameController::class, "create"]);
     Route::post('/games-store', [GameController::class, "store"]);
     Route::get('/games/{game}/edit', [GameController::class, "edit"])->name('games.edit');

@@ -1,9 +1,11 @@
 <x-app-layout>
+    <a href="/games" class="text-blue-500 hover:underline">Go Back</a>
     <div class="container mx-auto px-4">
-        <a href="{{ route('lists-create', ['game_id' => $game->id]) }}" class="text-blue-500 hover:underline mb-4 block">Create List for this Game</a>
+        
         <div class="text-center">
             <h1 class="text-2xl font-bold mb-4">{{ $game->title }}</h1> 
             <img src="{{ $game->img_path }}" alt="{{ $game->title }}" width="150" height="100" class="mx-auto m-4">
+            <a href="{{ route('lists-create', ['game_id' => $game->id]) }}" class="text-blue-500 hover:underline mb-4 block">Create List for this Game</a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach ($lists as $list)

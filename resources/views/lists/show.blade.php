@@ -1,4 +1,5 @@
 <x-app-layout>
+    <a href="/games-show/{{$list->game_id}}" class="text-blue-500 hover:underline">Go Back</a>
     <div class="w-full max-w-6xl mx-auto p-6 space-y-6">
         <h1 class="text-center text-3xl">{{ $list->name }} by @foreach ($users as $user) @if ($user->id == $list->user_id) {{$user->name}} @endif @endforeach </h1>
         @if ($loggedId == $list->user_id)
@@ -12,6 +13,7 @@
                     <a href="{{ $link->modlink }}" class="text-blue-500 hover:underline">{{ $link->modlink }}</a>
                     <p class="text-sm mt-2">{{$link->moddesc}}</p>
                 </li>
+                @if ($loggedId == $list->user_id || $loggedUser->type == "admin")
                 <div class="flex space-x-2">
                     <form action="/links/{{ ($link->id) }} " method="post">
                         @csrf
@@ -20,6 +22,7 @@
                     </form>
                     <a href="{{ route('links.edit', $link->id) }}" class="mt-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold rounded-md text-center">Edit</a>
                 </div>
+                @endif
             @endforeach
         </ul>
     </div>
