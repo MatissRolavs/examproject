@@ -16,8 +16,8 @@
                                 <img src={{ $game["img_path"] }} alt="game image" class="">
                             </a> 
                             <div style="width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                <a href="/games-show/{{ $game['id'] }}" class="font-bold text-lg">{{ $game["title"] }}</a>
-                                <p class="text-sm">Posts: {{ $game["posts_amount"] }}</p>
+                                <a href="/games-show/{{ $game['id'] }}" class="font-bold text-lg text-black">{{ $game["title"] }}</a>
+                                <p class="text-sm text-black">Posts: {{ $game["posts_amount"] }}</p>
                             </div>
                             @if ($userType == "admin")
                             <div class="flex space-x-2">
